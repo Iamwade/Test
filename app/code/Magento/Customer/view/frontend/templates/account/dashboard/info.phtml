@@ -17,7 +17,13 @@
             </strong>
             <div class="box-content">
                 <p>
-                    
+                    <?php if (($block->getCustomer()->getGender())== 1): ?>
+                        <?= $block->escapeHtml(__('Mr ')) ?>
+                    <?php elseif (($block->getCustomer()->getGender())== 2): ?>
+                        <?= $block->escapeHtml(__('Mrs ')) ?>
+                    <?php else: ?>
+                        <?= $block->escapeHtml(__('Non Specified ')) ?>
+                    <?php endif; ?>
                     <?= $block->escapeHtml($block->getName()) ?><br>
                     <?= $block->escapeHtml($block->getCustomer()->getEmail()) ?><br>
 
