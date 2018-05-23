@@ -1,8 +1,24 @@
+
 <?php
-/** @var \Mastering\SampleModule\Block\Hello $block */
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+/** @var \Magento\Catalog\Model\ResourceModel\Product\Collection $productCollection */
+$productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\Collection');
+/** Apply filters here */
+$collection = $productCollection->addAttributeToSelect('*')
+    ->load();
+$number = 1;
+foreach ($collection as $product){
+    echo "Данные продукта номер ". $number++ ."<br>";
+    print_r($product->getData());
+    echo "<br>"."<br>";
+}
+
+echo "<br>"."<br>";
+
+foreach ($collection as $product){
+
+    echo "Продукт номер ".$product->getId()." это ".$product->getName()." цена товара ".$product->getPrice().'<br>';
+
+    echo "<br>";
+}
 ?>
-<?php foreach ($block->getItems() as $item): ?>
-    <p>
-        <?php echo $item->getName(); ?>: <?php echo $item->getDescription(); ?>
-    </p>
-<?php endforeach; ?>
