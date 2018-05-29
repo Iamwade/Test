@@ -24,6 +24,7 @@
                     <?php else: ?>
                         <?= $block->escapeHtml(__('Non Specified ')) ?>
                     <?php endif; ?>
+                    
                     <?= $block->escapeHtml($block->getName()) ?><br>
                     <?= $block->escapeHtml($block->getCustomer()->getEmail()) ?><br>
                 </p>
