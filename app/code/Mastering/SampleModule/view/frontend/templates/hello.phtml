@@ -1,26 +1,24 @@
-
 <?php
-$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-/** @var \Magento\Catalog\Model\ResourceModel\Product\Collection $productCollection */
-$productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\Collection');
-/** Apply filters here */
-$collection = $productCollection->addAttributeToSelect('*')
-    ->load();
-$number = 1;
-var_dump($collection);
-foreach ($collection as $product){
-//    echo "Данные п                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    родукта номер ". $number++ ."<br>";
-//    print_r($product->getData());
-//    echo "<br>"."<br>";
-//    var_dump($product->getData());
-}
-
-echo "<br>"."<br>";
-
-foreach ($collection as $_item){
-
-    echo "Продукт номер ".$_item->getId()." это ".$_item->getName()." цена товара ".$_item->getPrice().'<br>';
-
-    echo "<br>";
-}
+/** @var \Mastering\SampleModule\Block\Hello $block */
 ?>
+<?php foreach ($block->getItems() as $item) : ?>
+<p>
+<?php echo $item->getName(); ?> : <?php echo $item->getId(); ?> : <?php echo $item->getPrice(); ?>
+    : <?php echo $item->getWeight(); ?>
+    : <?php echo $item->getImage(); ?>
+    : <?php echo $item->getImageUrl(); ?>
+    : <?php echo $item->getPrice(); ?>
+</p>
+<?php endforeach;?>
+
+<?php foreach ($block->getItems() as $item) : ?>
+    <p>
+        <?php var_dump($item->getData())?>
+<?php endforeach;?>
+
+
+
+
+
+
+

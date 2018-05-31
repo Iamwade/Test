@@ -1,34 +1,38 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: iambatman
- * Date: 20.05.18
- * Time: 20:47
- */
+
 namespace Mastering\SampleModule\Block;
 
 use Magento\Framework\View\Element\Template;
-use Mastering\SampleModule\Model\ResourceModel\Item\Collection;
-use Mastering\SampleModule\Model\ResourceModel\Item\CollectionFactory;
 
 class Hello extends Template
 {
-    private $collectionFactory;
+    private $_productCollectionFactory;
+    protected $_imageBuilder;
 
     public function __construct(
-        Template\Context $context,
-        CollectionFactory $collectionFactory,
+        \Magento\Backend\Block\Template\Context $context,
+        \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
+        \Magento\Catalog\Block\Product\ImageBuilder $_imageBuilder,
         array $data = []
-    ) {
-        $this->collectionFactory = $collectionFactory;
+    )
+
+    {
+        $this->_productCollectionFactory = $productCollectionFactory;
+        $this->_imageBuilder=$_imageBuilder;
         parent::__construct($context, $data);
     }
 
-    /**
-     * @return \Mastering\SampleModule\Model\Item[]
-     */
     public function getItems()
     {
-        return $this->collectionFactory->create()->getItems();
+        $collection = $this->_productCollectionFactory->create();
+        $collection->addAttributeToSelect('*');
+        return $collection;
+    }
+    public function getImage($product, $imageId, $attributes = [])
+    {
+        return $this->_imageBuilder->setProduct($product)
+            ->setImageId($imageId)
+            ->setAttributes($attributes)
+            ->create();
     }
 }
